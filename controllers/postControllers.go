@@ -11,13 +11,15 @@ import (
 func CreatePosts(c *gin.Context) {
 
 	var body struct {
-		Title string
-		Body  string
+		Title    string
+		Body     string
+		Category string
+		Author   string
 	}
 
 	c.Bind((&body))
 
-	post := models.BlogPost{Title: body.Title, Body: body.Body}
+	post := models.BlogPost{Title: body.Title, Body: body.Body, Category: body.Category, Author: body.Author}
 
 	result := initializers.DB.Create(&post)
 
