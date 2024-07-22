@@ -71,8 +71,10 @@ func UpdatePost(c *gin.Context) {
 
 	id := c.Param("id")
 	var body struct {
-		Title string
-		Body  string
+		Title    string
+		Body     string
+		Category string
+		Author   string
 	}
 
 	c.Bind((&body))
@@ -80,7 +82,7 @@ func UpdatePost(c *gin.Context) {
 	var post models.BlogPost
 	result := initializers.DB.First(&post, id)
 
-	initializers.DB.Model(&post).Updates(models.BlogPost{Title: body.Title, Body: body.Body})
+	initializers.DB.Model(&post).Updates(models.BlogPost{Title: body.Title, Body: body.Body, Category: body.Category, Author: body.Author})
 
 	if result.Error != nil {
 		c.Status(400)
